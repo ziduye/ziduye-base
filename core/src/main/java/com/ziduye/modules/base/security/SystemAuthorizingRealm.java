@@ -9,6 +9,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import com.ziduye.utils.Const;
+import com.ziduye.utils.resources.Global;
+import com.ziduye.utils.security.Encodes;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -24,10 +27,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springside.modules.utils.Encodes;
 
-import com.ziduye.base.Const;
-import com.ziduye.base.util.Global;
 import com.ziduye.base.web.Servlets;
 import com.ziduye.modules.sys.entity.Menu;
 import com.ziduye.modules.sys.service.SystemService;

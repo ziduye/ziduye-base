@@ -9,15 +9,16 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ziduye.utils.base.Exceptions;
+import com.ziduye.utils.base.StringUtils;
+import com.ziduye.utils.resources.Global;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.method.HandlerMethod;
-import org.springside.modules.utils.Exceptions;
+
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.ziduye.base.util.Global;
-import com.ziduye.base.util.StringUtils;
+
 import com.ziduye.modules.base.service.SpringContextHolder;
 import com.ziduye.modules.base.util.CacheUtils;
 import com.ziduye.modules.sys.entity.Log;
@@ -94,7 +95,7 @@ public class LogUtils {
 			}
 			// 如果有异常，设置异常信息
 			if(ex != null){
-				log.setException(Exceptions.getStackTraceAsString(ex));				
+				log.setException(Exceptions.getStackTraceAsString(ex));
 			}
 			// 如果无标题并无异常日志，则不保存信息
 			if (StringUtils.isBlank(log.getTitle()) && StringUtils.isBlank(log.getException())){

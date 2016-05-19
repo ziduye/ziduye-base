@@ -14,6 +14,7 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 import javax.validation.Validator;
 
+import com.ziduye.utils.security.Encodes;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -28,12 +29,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springside.modules.utils.Encodes;
 
 import com.google.common.base.Charsets;
 import com.google.common.net.HttpHeaders;
 import com.ziduye.utils.bean.BeanValidators;
 import com.ziduye.utils.bean.JsonMapper;
+
 
 
 /**

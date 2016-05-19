@@ -4,19 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.ziduye</groupId>
-    <artifactId>base</artifactId>
-    <version>1.0.0</version>
+    <artifactId>manage</artifactId>
 
-    <modules>
-        <module>parent</module>
-        <module>core</module>
-        <module>utils</module>
-        <module>manage</module>
-    </modules>
+    <name>ziduye-manage</name>
+    <packaging>war</packaging>
 
-    <name>ziduye-base</name>
-    <packaging>pom</packaging>
+    <parent>
+        <groupId>com.ziduye</groupId>
+        <artifactId>parent</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../parent/pom.xml</relativePath>
+    </parent>
 
 
 </project>

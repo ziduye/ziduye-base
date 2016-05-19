@@ -3,10 +3,10 @@ package com.ziduye.modules.base.entity;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.ziduye.base.Const;
 import com.ziduye.base.entity.BaseEntity;
-import com.ziduye.base.util.Ids;
 import com.ziduye.modules.sys.entity.User;
+import com.ziduye.utils.Const;
+import com.ziduye.utils.base.Ids;
 
 public class DataEntity<T> extends BaseEntity<T> {
 

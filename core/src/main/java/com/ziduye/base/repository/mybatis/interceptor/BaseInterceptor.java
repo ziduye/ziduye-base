@@ -6,10 +6,11 @@ package com.ziduye.base.repository.mybatis.interceptor;
 import java.io.Serializable;
 import java.util.Properties;
 
+import com.ziduye.utils.base.Reflections;
+import com.ziduye.utils.resources.Global;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
 import org.apache.ibatis.plugin.Interceptor;
-import org.springside.modules.utils.Reflections;
 
 import com.ziduye.base.entity.PageBean;
 import com.ziduye.base.repository.dialect.Dialect;
@@ -22,7 +23,6 @@ import com.ziduye.base.repository.dialect.imp.OracleDialect;
 import com.ziduye.base.repository.dialect.imp.PostgreSQLDialect;
 import com.ziduye.base.repository.dialect.imp.SQLServer2005Dialect;
 import com.ziduye.base.repository.dialect.imp.SybaseDialect;
-import com.ziduye.base.util.Global;
 
 
 /**
@@ -57,7 +57,7 @@ public abstract class BaseInterceptor implements Interceptor, Serializable {
             if (parameterObject instanceof PageBean) {
                 return (PageBean<Object>) parameterObject;
             } else {
-                return (PageBean<Object>)Reflections.getFieldValue(parameterObject, PAGE);
+                return (PageBean<Object>) Reflections.getFieldValue(parameterObject, PAGE);
             }
     	}catch (Exception e) {
 			return null;

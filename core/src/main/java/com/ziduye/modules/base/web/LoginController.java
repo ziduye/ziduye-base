@@ -5,6 +5,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ziduye.utils.Const;
+import com.ziduye.utils.base.Ids;
+import com.ziduye.utils.base.StringUtils;
+import com.ziduye.utils.resources.Global;
+import com.ziduye.utils.web.CookieUtils;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.web.util.WebUtils;
@@ -16,12 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.common.collect.Maps;
-import com.ziduye.base.Const;
 import com.ziduye.base.security.shiro.session.SessionDAO;
-import com.ziduye.base.util.CookieUtils;
-import com.ziduye.base.util.Global;
-import com.ziduye.base.util.Ids;
-import com.ziduye.base.util.StringUtils;
 import com.ziduye.base.web.BaseController;
 import com.ziduye.modules.base.security.FormAuthenticationFilter;
 import com.ziduye.modules.base.security.SystemAuthorizingRealm.Principal;

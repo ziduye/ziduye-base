@@ -5,11 +5,12 @@ package com.ziduye.modules.base.entity;
 
 import javax.validation.constraints.NotNull;
 
+import com.ziduye.utils.base.Reflections;
+import com.ziduye.utils.base.StringUtils;
 import org.hibernate.validator.constraints.Length;
-import org.springside.modules.utils.Reflections;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.ziduye.base.util.StringUtils;
+
 
 /**
  * 数据Entity类
@@ -77,7 +78,7 @@ public abstract class TreeEntity<T> extends DataEntity<T> {
 	public String getParentId() {
 		String id = null;
 		if (parent != null){
-			id = (String)Reflections.getFieldValue(parent, "id");
+			id = (String) Reflections.getFieldValue(parent, "id");
 		}
 		return StringUtils.isNotBlank(id) ? id : "0";
 	}

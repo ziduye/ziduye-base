@@ -2,11 +2,11 @@ package com.ziduye.base.entity;
 
 import java.io.Serializable;
 
+import com.ziduye.utils.resources.Global;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ziduye.base.util.Global;
 
 public abstract class BaseEntity<T> implements Serializable {
 

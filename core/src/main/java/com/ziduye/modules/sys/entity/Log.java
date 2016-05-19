@@ -6,9 +6,9 @@ package com.ziduye.modules.sys.entity;
 import java.util.Date;
 import java.util.Map;
 
+import com.ziduye.utils.base.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import com.ziduye.base.util.StringUtils;
 import com.ziduye.modules.base.entity.DataEntity;
 
 /**

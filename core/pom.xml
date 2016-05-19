@@ -16,6 +16,12 @@
     <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>com.ziduye</groupId>
+            <artifactId>utils</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
         <!-- spring-->
         <dependency>
             <groupId>org.springframework</groupId>

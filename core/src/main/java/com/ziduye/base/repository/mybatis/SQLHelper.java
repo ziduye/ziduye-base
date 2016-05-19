@@ -1,7 +1,7 @@
 /**
  * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package com.ziduye.base.util;
+package com.ziduye.base.repository.mybatis;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.ErrorContext;
@@ -43,7 +43,7 @@ public class SQLHelper {
      * @param mappedStatement MappedStatement
      * @param boundSql        SQL
      * @param parameterObject 参数对象
-     * @throws java.sql.SQLException 数据库异常
+     * @throws SQLException 数据库异常
      */
     @SuppressWarnings("unchecked")
     public static void setParameters(PreparedStatement ps, MappedStatement mappedStatement, BoundSql boundSql, Object parameterObject) throws SQLException {

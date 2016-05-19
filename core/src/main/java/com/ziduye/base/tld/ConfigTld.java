@@ -1,6 +1,6 @@
 package com.ziduye.base.tld;
 
-import com.ziduye.base.util.Global;
+import com.ziduye.utils.resources.Global;
 
 public class ConfigTld {
 	/**

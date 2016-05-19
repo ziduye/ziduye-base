@@ -17,17 +17,18 @@ import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ziduye.utils.base.Collections3;
+import com.ziduye.utils.base.StringUtils;
+import com.ziduye.utils.resources.Global;
+import com.ziduye.utils.security.Encodes;
 import org.apache.commons.lang3.Validate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.context.request.ServletWebRequest;
-import org.springside.modules.utils.Collections3;
-import org.springside.modules.utils.Encodes;
+
 
 import com.google.common.base.Charsets;
 import com.google.common.net.HttpHeaders;
-import com.ziduye.base.util.Global;
-import com.ziduye.base.util.StringUtils;
 
 public class Servlets {
 

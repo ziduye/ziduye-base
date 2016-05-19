@@ -2,17 +2,18 @@ package com.ziduye.modules.sys.service;
 
 import java.util.Collection;
 
+import com.ziduye.utils.resources.Global;
+import com.ziduye.utils.security.Digests;
+import com.ziduye.utils.security.Encodes;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.InvalidSessionException;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springside.modules.utils.Digests;
-import org.springside.modules.utils.Encodes;
+
 
 import com.ziduye.base.security.shiro.session.SessionDAO;
-import com.ziduye.base.util.Global;
 import com.ziduye.modules.base.security.ILoginService;
 import com.ziduye.modules.base.security.IUser;
 
@@ -89,7 +90,7 @@ public class SystemService implements ILoginService{
 	public static boolean printKeyLoadMessage(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("\r\n======================================================================\r\n");
-		sb.append("\r\n    欢迎使用 "+Global.getConfig("productName")+" \r\n");
+		sb.append("\r\n    欢迎使用 "+ Global.getConfig("productName")+" \r\n");
 		sb.append("\r\n======================================================================\r\n");
 		System.out.println(sb.toString());
 		return true;

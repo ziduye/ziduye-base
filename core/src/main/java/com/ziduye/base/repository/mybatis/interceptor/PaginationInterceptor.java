@@ -3,6 +3,7 @@
  */
 package com.ziduye.base.repository.mybatis.interceptor;
 
+import com.ziduye.base.repository.mybatis.SQLHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.BoundSql;
@@ -16,7 +17,6 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
 import com.ziduye.base.entity.PageBean;
-import com.ziduye.base.util.SQLHelper;
 
 import java.util.Properties;
 

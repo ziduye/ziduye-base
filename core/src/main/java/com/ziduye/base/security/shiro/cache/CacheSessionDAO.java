@@ -9,6 +9,10 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ziduye.utils.Const;
+import com.ziduye.utils.base.DateUtils;
+import com.ziduye.utils.base.StringUtils;
+import com.ziduye.utils.resources.Global;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.UnknownSessionException;
 import org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO;
@@ -18,11 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Sets;
-import com.ziduye.base.Const;
 import com.ziduye.base.security.shiro.session.SessionDAO;
-import com.ziduye.base.util.DateUtils;
-import com.ziduye.base.util.Global;
-import com.ziduye.base.util.StringUtils;
 import com.ziduye.base.web.Servlets;
 
 /**
