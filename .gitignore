@@ -7,7 +7,7 @@
 .checkstyle
 
 #idea
-.idea
+/.idea/*
 *.iml
 
 #maven编译目录
