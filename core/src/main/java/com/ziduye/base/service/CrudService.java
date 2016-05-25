@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ziduye.base.dao.CrudDao;
-import com.ziduye.modules.base.entity.DataEntity;
+import com.ziduye.base.entity.DataEntity;
 
 /**
  * Service基类

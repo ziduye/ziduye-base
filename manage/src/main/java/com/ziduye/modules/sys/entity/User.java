@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
-import com.ziduye.modules.base.entity.DataEntity;
+import com.ziduye.base.entity.DataEntity;
 import com.ziduye.modules.base.security.IUser;
 
 public class User extends DataEntity<User> implements IUser{

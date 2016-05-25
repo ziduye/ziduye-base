@@ -9,7 +9,7 @@ import java.util.Map;
 import com.ziduye.utils.base.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import com.ziduye.modules.base.entity.DataEntity;
+import com.ziduye.base.entity.DataEntity;
 
 /**
  * 日志Entity

@@ -3,7 +3,7 @@ package com.ziduye.modules.sys.entity;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.ziduye.modules.base.entity.DataEntity;
+import com.ziduye.base.entity.DataEntity;
 
 public class Role extends DataEntity<Role> {
 	

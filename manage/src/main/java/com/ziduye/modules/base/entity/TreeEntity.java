@@ -3,13 +3,13 @@
  */
 package com.ziduye.modules.base.entity;
 
-import javax.validation.constraints.NotNull;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.ziduye.base.entity.DataEntity;
 import com.ziduye.utils.base.Reflections;
 import com.ziduye.utils.base.StringUtils;
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.validation.constraints.NotNull;
 
 
 /**
