@@ -2,17 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>base</artifactId>
-        <groupId>com.ziduye</groupId>
-        <version>1.0.0</version>
-    </parent>
-
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>parent</artifactId>
     <name>ziduye-parent</name>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
+
+    <prerequisites>
+        <maven>3.0.0</maven>
+    </prerequisites>
 
     <properties>
         <ziduye.version>1.0.0</ziduye.version>
@@ -106,10 +111,6 @@
         <downloadSources>true</downloadSources>
 
     </properties>
-
-    <prerequisites>
-        <maven>3.0.0</maven>
-    </prerequisites>
 
     <!-- 设定主仓库，按设定顺序进行查找。 -->
     <repositories>
@@ -295,24 +296,28 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>${h2.version}</version>
+                <scope>runtime</scope>
             </dependency>
 
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.driver.version}</version>
+                <scope>runtime</scope>
             </dependency>
 
             <dependency>
                 <groupId>com.oracle</groupId>
                 <artifactId>ojdbc14</artifactId>
                 <version>${oracle.driver.version}</version>
+                <scope>runtime</scope>
             </dependency>
 
             <dependency>
                 <groupId>net.sourceforge.jtds</groupId>
                 <artifactId>jtds</artifactId>
                 <version>${mssql.driver.version}</version>
+                <scope>runtime</scope>
             </dependency>
 
             <!-- connection pool -->
