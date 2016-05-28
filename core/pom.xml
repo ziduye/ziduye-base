@@ -4,6 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <name>ziduye-core</name>
+    <packaging>jar</packaging>
+
+    <artifactId>core</artifactId>
+
     <parent>
         <groupId>com.ziduye</groupId>
         <artifactId>parent</artifactId>
@@ -11,16 +16,11 @@
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>core</artifactId>
-
-    <name>ziduye-core</name>
-    <packaging>jar</packaging>
-
     <dependencies>
+
         <dependency>
             <groupId>com.ziduye</groupId>
             <artifactId>utils</artifactId>
-            <version>1.0.0</version>
         </dependency>
 
         <!-- spring-->
