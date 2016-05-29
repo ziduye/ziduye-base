@@ -10,11 +10,7 @@ import com.ziduye.modules.sys.entity.User;
 @Service
 @Transactional(readOnly = true)
 public class UserService extends CrudService<UserDao, User>{
-	
-	@Transactional(readOnly = false)
-	public int insert(User t) {
-		return dao.insert(t);
-	}
+
 	/**
 	 * 根据登录名查找用户
 	 * @param loginName

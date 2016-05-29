@@ -1,10 +1,13 @@
 package com.ziduye.modules.base.web;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.google.common.collect.Maps;
+import com.ziduye.base.security.shiro.session.SessionDAO;
+import com.ziduye.base.web.BaseController;
+import com.ziduye.modules.base.security.FormAuthenticationFilter;
+import com.ziduye.modules.base.security.SystemAuthorizingRealm.LoginUser;
+import com.ziduye.modules.base.servlet.ValidateCodeServlet;
+import com.ziduye.modules.base.util.CacheUtils;
+import com.ziduye.modules.sys.util.UserUtils;
 import com.ziduye.utils.Const;
 import com.ziduye.utils.base.Ids;
 import com.ziduye.utils.base.StringUtils;
@@ -20,14 +23,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.google.common.collect.Maps;
-import com.ziduye.base.security.shiro.session.SessionDAO;
-import com.ziduye.base.web.BaseController;
-import com.ziduye.modules.base.security.FormAuthenticationFilter;
-import com.ziduye.modules.base.security.SystemAuthorizingRealm.Principal;
-import com.ziduye.modules.base.servlet.ValidateCodeServlet;
-import com.ziduye.modules.base.util.CacheUtils;
-import com.ziduye.modules.sys.util.UserUtils;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
 @Controller
 public class LoginController extends BaseController {
@@ -40,7 +38,7 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping(value = "${adminPath}/login", method = RequestMethod.GET)
 	public String loginPage(HttpServletRequest request, HttpServletResponse response, Model model) {
-		Principal principal = UserUtils.getPrincipal();
+		LoginUser principal = UserUtils.getPrincipal();
 
 		if (logger.isDebugEnabled()){
 			logger.debug("login, active session size: {}", sessionDAO.getActiveSessions(false).size());
@@ -64,7 +62,7 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping(value = "${adminPath}/login", method = RequestMethod.POST)
 	public String loginSubmit(HttpServletRequest request, HttpServletResponse response, Model model) {
-		Principal principal = UserUtils.getPrincipal();
+        LoginUser principal = UserUtils.getPrincipal();
 		
 		// 如果已经登录，则跳转到管理首页
 		if(principal != null){
@@ -109,7 +107,7 @@ public class LoginController extends BaseController {
 	@RequiresPermissions("user")
 	@RequestMapping(value = "${adminPath}")
 	public String index(HttpServletRequest request, HttpServletResponse response) {
-		Principal principal = UserUtils.getPrincipal();
+        LoginUser principal = UserUtils.getPrincipal();
 
 		// 登录成功后，验证码计算器清零
 		isValidateCodeLogin(principal.getLoginName(), false, true);

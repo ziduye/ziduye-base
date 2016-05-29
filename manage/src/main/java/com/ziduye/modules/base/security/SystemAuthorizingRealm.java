@@ -3,12 +3,11 @@
  */
 package com.ziduye.modules.base.security;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
+import com.ziduye.base.web.Servlets;
+import com.ziduye.modules.sys.entity.Menu;
+import com.ziduye.modules.sys.service.SystemService;
+import com.ziduye.modules.sys.util.LogUtils;
+import com.ziduye.modules.sys.util.UserUtils;
 import com.ziduye.utils.Const;
 import com.ziduye.utils.resources.Global;
 import com.ziduye.utils.security.Encodes;
@@ -28,11 +27,10 @@ import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ziduye.base.web.Servlets;
-import com.ziduye.modules.sys.entity.Menu;
-import com.ziduye.modules.sys.service.SystemService;
-import com.ziduye.modules.sys.util.LogUtils;
-import com.ziduye.modules.sys.util.UserUtils;
+import javax.annotation.PostConstruct;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * 系统安全认证实现类
@@ -82,7 +80,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			}
 			//TODO 根据不同的登录方式用不同的方法验证
 			byte[] salt = Encodes.decodeHex(user.getPassword().substring(0,16));
-			return new SimpleAuthenticationInfo(new Principal(user, token.isMobileLogin()), 
+			return new SimpleAuthenticationInfo(new LoginUser(user, token.isMobileLogin()),
 					user.getPassword().substring(16), ByteSource.Util.bytes(salt), getName());
 		} else {
 			return null;
@@ -95,7 +93,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		// 获取当前已登录的用户
-		Principal principal = (Principal) getAvailablePrincipal(principals);
+        LoginUser principal = (LoginUser) getAvailablePrincipal(principals);
 		//是否允许一个帐号多次登录(配置文件)
 		if (!Const.TRUE.equals(Global.getConfig("user.multiAccountLogin"))){
 			Collection<Session> sessions = systemService.getSessionDao().getActiveSessions(true, principal, SystemService.getSession());
@@ -198,7 +196,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	/**
 	 * 授权用户信息
 	 */
-	public static class Principal implements Serializable {
+	public static class LoginUser implements Serializable {
 
 		private static final long serialVersionUID = 1L;
 		
@@ -209,7 +207,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		
 //		private Map<String, Object> cacheMap;
 
-		public Principal(IUser user, boolean mobileLogin) {
+		public LoginUser(IUser user, boolean mobileLogin) {
 			this.id = user.getUserId();
 			this.loginName = user.getLoginName();
 			this.name = user.getUserName();

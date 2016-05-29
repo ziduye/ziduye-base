@@ -1,7 +1,8 @@
 package com.ziduye.modules.sys.service;
 
-import java.util.Collection;
-
+import com.ziduye.base.security.shiro.session.SessionDAO;
+import com.ziduye.modules.base.security.ILoginService;
+import com.ziduye.modules.base.security.IUser;
 import com.ziduye.utils.resources.Global;
 import com.ziduye.utils.security.Digests;
 import com.ziduye.utils.security.Encodes;
@@ -12,10 +13,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import com.ziduye.base.security.shiro.session.SessionDAO;
-import com.ziduye.modules.base.security.ILoginService;
-import com.ziduye.modules.base.security.IUser;
+import java.util.Collection;
 
 @Service
 public class SystemService implements ILoginService{
@@ -100,7 +98,18 @@ public class SystemService implements ILoginService{
 	public IUser getUserByLoginName(String loginName) {
 		return userService.getByLoginName(loginName);
 	}
-	public SessionDAO getSessionDao() {
+
+    @Override
+    public IUser getUserByEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public IUser getUserByMobilPhone(String mobilPhone) {
+        return null;
+    }
+
+    public SessionDAO getSessionDao() {
 		return sessionDao;
 	}
 	public void setSessionDao(SessionDAO sessionDao) {

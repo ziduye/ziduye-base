@@ -3,16 +3,7 @@
  */
 package com.ziduye.modules.sys.util;
 
-import java.util.List;
-
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.UnavailableSecurityManagerException;
-import org.apache.shiro.session.InvalidSessionException;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.Subject;
-
-import com.ziduye.base.service.BaseService;
-import com.ziduye.modules.base.security.SystemAuthorizingRealm.Principal;
+import com.ziduye.modules.base.security.SystemAuthorizingRealm.LoginUser;
 import com.ziduye.modules.base.service.SpringContextHolder;
 import com.ziduye.modules.base.util.CacheUtils;
 import com.ziduye.modules.sys.entity.Menu;
@@ -21,6 +12,13 @@ import com.ziduye.modules.sys.entity.User;
 import com.ziduye.modules.sys.service.MenuService;
 import com.ziduye.modules.sys.service.RoleService;
 import com.ziduye.modules.sys.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.UnavailableSecurityManagerException;
+import org.apache.shiro.session.InvalidSessionException;
+import org.apache.shiro.session.Session;
+import org.apache.shiro.subject.Subject;
+
+import java.util.List;
 
 /**
  * 用户工具类
@@ -48,10 +46,10 @@ public class UserUtils {
 	/**
 	 * 获取当前登录者对象
 	 */
-	public static Principal getPrincipal(){
+	public static LoginUser getPrincipal(){
 		try{
 			Subject subject = SecurityUtils.getSubject();
-			Principal principal = (Principal)subject.getPrincipal();
+			LoginUser principal = (LoginUser)subject.getPrincipal();
 			if (principal != null){
 				return principal;
 			}
@@ -68,7 +66,7 @@ public class UserUtils {
 	 * @return 取不到返回 null
 	 */
 	public static User getUser(){
-		Principal principal = getPrincipal();
+        LoginUser principal = getPrincipal();
 		if (principal != null){
 			User user = getUser(principal.getId());
 			if (user != null){

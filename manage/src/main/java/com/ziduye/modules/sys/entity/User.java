@@ -1,12 +1,12 @@
 package com.ziduye.modules.sys.entity;
 
-import java.util.Date;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 import com.ziduye.base.entity.DataEntity;
 import com.ziduye.modules.base.security.IUser;
+
+import java.util.Date;
+import java.util.List;
 
 public class User extends DataEntity<User> implements IUser{
 	
@@ -30,29 +30,20 @@ public class User extends DataEntity<User> implements IUser{
 	 */
 	private List<Role> roles = Lists.newArrayList();
 	
-	public String getLoginName() {
-		return loginName;
-	}
+
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
 	}
-	@JsonIgnore
-	public String getPassword() {
-		return password;
-	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getUserName() {
-		return userName;
-	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
+
+    public void setEmail(String email) {
 		this.email = email;
 	}
 	public String getStatus() {
@@ -85,20 +76,44 @@ public class User extends DataEntity<User> implements IUser{
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
-	
-	@Override
-	public String getUserId() {
-		return id;
-	}
-	@Override
+
+    public boolean isAdmin() {
+        if("ziduye".equals(getUserName())){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public String getUserId() {
+        return id;
+    }
+    @Override
+    public String getLoginName() {
+        return loginName;
+    }
+    @Override
+    public String getEmail() {
+        return email;
+    }
+    @Override
+    public String getMobilPhone() {
+        return null;
+    }
+    @Override
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
+    @Override
+    public String getUserName() {
+        return userName;
+    }
+    @Override
 	public String getLoginFlag() {
 		return status;
 	}
-	public boolean isAdmin() {
-		if("ziduye".equals(getUserName())){
-			return true;
-		}else{
-			return false;			
-		}
-	}
+
+
 }
