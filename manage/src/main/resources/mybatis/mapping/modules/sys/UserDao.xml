@@ -100,15 +100,19 @@
 			sys_user
 		SET
 			password = #{password} 
-		WHERE id = #{id}
+		WHERE
+			id = #{id}
 	</update>
 	
 	<!-- 更新登录信息，如登录IP、登录时间 -->
 	<update id="updateLoginInfo">
-		UPDATE sys_user SET 
+		UPDATE
+			sys_user
+		SET
 			login_ip = #{loginIp}, 
 			login_Date = #{loginDate} 
-		WHERE id = #{id}
+		WHERE
+			id = #{id}
 	</update>
 
 </mapper>
