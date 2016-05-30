@@ -8,7 +8,7 @@ public interface IUser {
 
     public String getEmail();
 
-    public String getMobilPhone();
+    public String getMobile();
 
     public String getPassword();
 

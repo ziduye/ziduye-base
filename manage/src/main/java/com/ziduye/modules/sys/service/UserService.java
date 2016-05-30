@@ -19,15 +19,7 @@ public class UserService extends CrudService<UserDao, User>{
 	public User getByLoginName(String loginName){
 		return dao.getByLoginName(loginName);
 	}
-	/**
-	 * 更新登录信息
-	 * @param user
-	 * @return
-	 */
-	@Transactional(readOnly = false)
-	public int updateLoginInfo(User user){
-		return 0;
-	}
+
 	/**
 	 * 更新用户密码
 	 * @param user

@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ziduye.modules.sys.dao.UserDao">
-	
+
     <sql id="userColumns">
-    	a.id AS "id",
-    	a.login_name AS "loginName",
-    	a.password AS "password",
-		a.user_name AS "userName",
-		a.email AS "email",
-		a.login_ip AS "loginIP",
-		a.login_date AS "loginDate",
-		a.login_flag AS "loginFlag",
-		a.del_flag AS "delFlag"
+    	a.id ,
+     	a.login_name,
+     	a.email,
+    	a.mobile,
+    	a.password,
+		a.user_name,
+		a.status,
+		a.reg_date
     </sql>
 
-	
 	<!-- 根据编号获得用户 -->
 	<select id="get" resultType="User">
 		SELECT
 			<include refid="userColumns"/>
-		FROM sys_user a
-		WHERE  id = #{id}
+		FROM
+			sys_user a
+		WHERE
+			id = #{id}
 	</select>
 	
 	<!-- 根据登录名查询用户 -->
 	<select id="getByLoginName" resultType="User" parameterType="User">
 		SELECT
 			<include refid="userColumns"/>
-		FROM sys_user a
-		<include refid="userJoins"/>
-		WHERE a.login_name = #{loginName} AND a.del_flag = #{DEL_FLAG_NORMAL}
+		FROM
+			sys_user a
+		WHERE
+			a.login_name = #{loginName}
 	</select>
 	
 	<!-- 分页查询用户信息 -->
 	<select id="findList" resultType="User">
 		SELECT
 			<include refid="userColumns"/>
-		FROM sys_user a
-		<include refid="userJoins"/>
-		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
+		FROM
+			sys_user a
+		WHERE
+			1 = 1
 		<!-- 如果不是超级管理员，则不显示超级管理员用户 -->
 		<if test="!currentUser.admin">
 			AND a.id != '1'
@@ -46,63 +48,57 @@
 		<if test="loginName != null and loginName != ''">
 			AND a.login_name like  CONCAT('%', #{loginName}, '%')
 		</if>
-		<if test="name != null and name != ''">
-			AND a.name like CONCAT('%', #{name}, '%')
+		<if test="mobile != null and mobile != ''">
+			AND a.mobile like  CONCAT('%', #{mobile}, '%')
+		</if>
+		<if test="userName != null and userName != ''">
+			AND a.user_name like CONCAT('%', #{userName}, '%')
 		</if>
 	</select>
-	
-	<!-- 查询全部用户 -->
-	<select id="findAllList" resultType="User">
-		SELECT
-			<include refid="userColumns"/>
-		FROM sys_user a
-		<include refid="userJoins"/>
-		WHERE a.del_flag = #{DEL_FLAG_NORMAL}
-	</select>
-	
 	
 	<!-- 插入用户 -->
 	<insert id="insert">
 		INSERT INTO sys_user(
-			APIkey,
+			id ,
 			login_name,
-			password, 
-			name, 
-			email, 
-			mobile, 
-			photo, 
-			login_flag, 
-			del_flag
+			email,
+			mobile,
+			password,
+			user_name,
+			status,
+			reg_date
 		) VALUES (
-			#{apiKey}, 
-			#{loginName}, 
-			#{password}, 
-			#{name}, 
-			#{email}, 
-			#{mobile}, 
-			#{photo}, 
-			#{loginFlag}, 
-			#{delFlag}
+			#{id},
+			#{loginName},
+			#{email},
+			#{mobile},
+			#{password},
+			#{userName},
+			#{status},
+			#{regDate}
 		)
 	</insert>
 	
 	<!-- 更新用户 -->
 	<update id="update">
-		UPDATE sys_user SET 
+		UPDATE
+			sys_user
+		SET
 			login_name = #{loginName},
-			APIkey = #{apiKey}, 
-			password = #{password}, 
-			name = #{name}, 
-			email = #{email}, 
-			mobile = #{mobile}, 
-			login_flag = #{loginFlag},
-			photo = #{photo}
-		WHERE id = #{id}
+			email = #{email},
+			mobile = #{mobile},
+			user_name = #{userName},
+			status = #{status},
+			reg_date = #{regDate}
+		WHERE
+			id = #{id}
 	</update>
 	
 	<!-- 更新用户密码 -->
 	<update id="updatePasswordById">
-		UPDATE sys_user SET 
+		UPDATE
+			sys_user
+		SET
 			password = #{password} 
 		WHERE id = #{id}
 	</update>

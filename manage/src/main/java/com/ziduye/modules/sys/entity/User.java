@@ -13,23 +13,25 @@ public class User extends DataEntity<User> implements IUser{
 	private static final long serialVersionUID = -6362467444987293320L;
 	
 	private String loginName;//登陆名
+	private String email;//电子邮箱
+	private String mobile;//手机号
+
 	private String password;//密码
 
 	private String userName;//用户名
-	private String email;//电子邮箱
+
 	private String status;//账号状态-->0:未激活(未审核),1:正常,2:账号被锁定,9:账号已注销
 	private Date regDate;//注册时间
-	private Date lastLoginDate;//最后一次登陆时间
-	
+
 	/**
 	 * 菜单列表
 	 */
 	private List<Menu> menus = Lists.newArrayList();
+
 	/**
 	 * 角色列表
 	 */
 	private List<Role> roles = Lists.newArrayList();
-	
 
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
@@ -58,12 +60,7 @@ public class User extends DataEntity<User> implements IUser{
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	public Date getLastLoginDate() {
-		return lastLoginDate;
-	}
-	public void setLastLoginDate(Date lastLoginDate) {
-		this.lastLoginDate = lastLoginDate;
-	}
+
 	public List<Menu> getMenus() {
 		return menus;
 	}
@@ -77,14 +74,18 @@ public class User extends DataEntity<User> implements IUser{
 		this.roles = roles;
 	}
 
-    public boolean isAdmin() {
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public boolean isAdmin() {
         if("ziduye".equals(getUserName())){
             return true;
         }else{
             return false;
         }
     }
-
+	//登录user 接口方法
     @Override
     public String getUserId() {
         return id;
@@ -98,8 +99,8 @@ public class User extends DataEntity<User> implements IUser{
         return email;
     }
     @Override
-    public String getMobilPhone() {
-        return null;
+    public String getMobile() {
+        return mobile;
     }
     @Override
     @JsonIgnore

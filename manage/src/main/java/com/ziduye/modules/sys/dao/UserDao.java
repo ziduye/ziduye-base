@@ -6,18 +6,14 @@ import com.ziduye.modules.sys.entity.User;
 
 @MyBatisRepository
 public interface UserDao extends CrudDao<User> {
-	/**
-	 * 更新登录信息
-	 * @param user
-	 * @return
-	 */
-    public int updateLoginInfo(User user);
+
 	/**
 	 * 更新用户密码
 	 * @param user
 	 * @return
 	 */
 	public int updatePassword(User user);
+
 	/**
 	 * 根据登录名查找用户
 	 * @param loginName
