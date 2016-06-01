@@ -3,22 +3,8 @@
  */
 package com.ziduye.modules.sys.util;
 
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.ziduye.utils.base.Exceptions;
-import com.ziduye.utils.base.StringUtils;
-import com.ziduye.utils.resources.Global;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.web.method.HandlerMethod;
-
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import com.ziduye.modules.base.service.SpringContextHolder;
 import com.ziduye.modules.base.util.CacheUtils;
 import com.ziduye.modules.sys.entity.Log;
@@ -26,6 +12,16 @@ import com.ziduye.modules.sys.entity.Menu;
 import com.ziduye.modules.sys.entity.User;
 import com.ziduye.modules.sys.service.LogService;
 import com.ziduye.modules.sys.service.MenuService;
+import com.ziduye.utils.base.Exceptions;
+import com.ziduye.utils.base.StringUtils;
+import com.ziduye.utils.resources.Global;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.web.method.HandlerMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 日志工具类
@@ -116,7 +112,7 @@ public class LogUtils {
 		Map<String, String> menuMap = (Map<String, String>)CacheUtils.getSysCache(CACHE_MENU_NAME_PATH_MAP);
 		if (menuMap == null){
 			menuMap = Maps.newHashMap();
-			List<Menu> menuList = menuService.listAll();
+			List<Menu> menuList = menuService.all();
 			for (Menu menu : menuList){
 				// 获取菜单名称路径（如：系统设置-机构用户-用户管理-编辑）
 				String namePath = "";

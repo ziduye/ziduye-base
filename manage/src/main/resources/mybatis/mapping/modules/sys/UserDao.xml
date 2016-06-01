@@ -34,7 +34,7 @@
 	</select>
 	
 	<!-- 分页查询用户信息 -->
-	<select id="findList" resultType="User">
+	<select id="list" resultType="User">
 		SELECT
 			<include refid="userColumns"/>
 		FROM

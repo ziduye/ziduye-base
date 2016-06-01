@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ziduye.modules.sys.dao.RoleDao">
+
+    <sql id="roleColumns">
+    	a.id ,
+     	a.role_sn,
+     	a.role_name,
+    	a.role_type
+    </sql>
+
+	<!-- 根据编号获得用户 -->
+	<select id="get" resultType="Role">
+		SELECT
+			<include refid="roleColumns"/>
+		FROM
+			sys_role a
+		WHERE
+			id = #{id}
+	</select>
+
+	
+	<!-- 分页查询用户信息 -->
+	<select id="list" resultType="Role">
+		SELECT
+			<include refid="roleColumns"/>
+		FROM
+            sys_role a
+		WHERE
+			1 = 1
+
+	</select>
+	
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO sys_role(
+			id ,
+            role_sn,
+            role_name,
+            role_type
+		) VALUES (
+			#{id},
+			#{roleSn},
+			#{roleName},
+			#{role_type}
+		)
+	</insert>
+	
+	<!-- 更新用户 -->
+	<update id="update">
+		UPDATE
+			sys_role
+		SET
+			role_sn = #{roleSn},
+			role_name = #{email},
+			role_type = #{roleType}
+		WHERE
+			id = #{id}
+	</update>
+
+</mapper>

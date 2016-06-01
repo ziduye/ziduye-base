@@ -89,8 +89,8 @@ public abstract class CrudService<D extends CrudDao<T>, T extends DataEntity<T>>
 	}
 
 	@Transactional(readOnly = false)
-	public List<T> listAll() {
-		return dao.listAll();
+	public List<T> all() {
+		return dao.all();
 	}
 
 	

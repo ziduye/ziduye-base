@@ -33,6 +33,10 @@
         </property>
     </bean>
 
+    <bean id="formAuthenticationFilter" class="com.ziduye.modules.base.security.FormAuthenticationFilter">
+
+    </bean>
+
     <!-- CAS认证过滤器 -->
     <bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
         <property name="failureUrl" value="${adminPath}/login"/>
@@ -40,7 +44,7 @@
 
     <!-- 項目自定义的Realm -->
     <bean id="shiroDbRealm" class="com.ziduye.modules.base.security.SystemAuthorizingRealm">
-        <property name="accountService" ref="accountService"/>
+
     </bean>
 
     <!-- 用户授权信息Cache, 采用EhCache -->
@@ -62,7 +66,6 @@
     </bean>
 
     <bean id="sessionDAO" class="com.ziduye.base.security.shiro.cache.CacheSessionDAO">
-        <property name="sessionIdGenerator" ref="idGen" />
         <property name="activeSessionsCacheName" value="activeSessionsCache" />
         <property name="cacheManager" ref="shiroCacheManager" />
     </bean>

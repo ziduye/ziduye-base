@@ -117,7 +117,7 @@ public class UserUtils {
 		if (roleList == null){
 			User user = getUser();
 			if (user.isAdmin()){
-				roleList = roleService.listAll();
+				roleList = roleService.all();
 			}else{
 				roleList = roleService.listByUserId(user.getId());
 			}
@@ -136,7 +136,7 @@ public class UserUtils {
 		if (menuList == null){
 			User user = getUser();
 			if (user.isAdmin()){
-				menuList = menuService.listAll();
+				menuList = menuService.all();
 			}else{
 				menuList = menuService.listByUserId(user.getId());
 			}

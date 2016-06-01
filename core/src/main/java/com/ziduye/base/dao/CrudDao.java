@@ -1,8 +1,8 @@
 package com.ziduye.base.dao;
 
-import java.util.List;
-
 import com.ziduye.base.entity.BaseEntity;
+
+import java.util.List;
 
 public interface CrudDao<T extends BaseEntity<T>> extends BaseDao {
 	/**
@@ -13,7 +13,7 @@ public interface CrudDao<T extends BaseEntity<T>> extends BaseDao {
 	/**
 	 * 查询所有数据列表
 	 */
-	public List<T> listAll();
+	public List<T> all();
 	
 	/**
 	 * 查询数据列表，如果需要分页，请设置分页对象，如：entity.setPage(new Page<T>());
