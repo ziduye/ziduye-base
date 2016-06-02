@@ -197,8 +197,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		private String id; // 编号
 		private String loginName; // 登录名
 		private String name; // 姓名
-		private boolean mobileLogin; // 是否手机登录
-		
+
 //		private Map<String, Object> cacheMap;
 
 		public LoginUser(IUser user) {
@@ -217,10 +216,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 
 		public String getName() {
 			return name;
-		}
-
-		public boolean isMobileLogin() {
-			return mobileLogin;
 		}
 
 		@Override
