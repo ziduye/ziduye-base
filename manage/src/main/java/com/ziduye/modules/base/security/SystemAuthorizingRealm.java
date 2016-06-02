@@ -26,6 +26,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
 import java.io.Serializable;
@@ -40,16 +41,9 @@ import java.util.List;
 public class SystemAuthorizingRealm extends AuthorizingRealm {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
-	
+
+	@Autowired
 	private SystemService systemService;
-
-	public SystemService getSystemService() {
-		return systemService;
-	}
-
-	public void setSystemService(SystemService systemService) {
-		this.systemService = systemService;
-	}
 
 	/**
 	 * 认证回调函数, 登录时调用
@@ -75,13 +69,13 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		// 校验用户名密码
 		IUser user = systemService.getUserByLoginName(loginName);
 		if (user != null) {
+			//TODO 判断用户帐号的状态
 			if (Const.NO.equals(user.getLoginFlag())){
 				throw new AuthenticationException("msg:该已帐号禁止登录.");
 			}
 			//TODO 根据不同的登录方式用不同的方法验证
 			byte[] salt = Encodes.decodeHex(user.getPassword().substring(0,16));
-			return new SimpleAuthenticationInfo(new LoginUser(user, token.isMobileLogin()),
-					user.getPassword().substring(16), ByteSource.Util.bytes(salt), getName());
+			return new SimpleAuthenticationInfo(new LoginUser(user),user.getPassword().substring(16), ByteSource.Util.bytes(salt), getName());
 		} else {
 			return null;
 		}
@@ -207,11 +201,10 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		
 //		private Map<String, Object> cacheMap;
 
-		public LoginUser(IUser user, boolean mobileLogin) {
+		public LoginUser(IUser user) {
 			this.id = user.getUserId();
 			this.loginName = user.getLoginName();
 			this.name = user.getUserName();
-			this.mobileLogin = mobileLogin;
 		}
 
 		public String getId() {

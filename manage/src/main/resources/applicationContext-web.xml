@@ -4,10 +4,10 @@
 
 	<description>导入ShowCase中的applicationContext文件列表</description>
 
-	<!-- required -->
+	<!-- required-->
 	<import resource="security/applicationContext-shiro.xml" />
 
-	<!-- optional -->
+	<!-- optional
 	<import resource="cache/applicationContext-ehcache.xml" />
-
+	-->
 </beans>

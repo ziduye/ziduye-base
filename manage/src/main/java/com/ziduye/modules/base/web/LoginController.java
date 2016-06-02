@@ -36,9 +36,9 @@ public class LoginController extends BaseController {
 	/**
 	 * 管理登录
 	 */
-	@RequestMapping(value = "${adminPath}/login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String loginPage(HttpServletRequest request, HttpServletResponse response, Model model) {
-		LoginUser principal = UserUtils.getPrincipal();
+		LoginUser principal = UserUtils.getLoginUser();
 
 		if (logger.isDebugEnabled()){
 			logger.debug("login, active session size: {}", sessionDAO.getActiveSessions(false).size());
@@ -60,9 +60,9 @@ public class LoginController extends BaseController {
 	/**
 	 * 登录失败，真正登录的POST请求由Filter完成
 	 */
-	@RequestMapping(value = "${adminPath}/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginSubmit(HttpServletRequest request, HttpServletResponse response, Model model) {
-        LoginUser principal = UserUtils.getPrincipal();
+        LoginUser principal = UserUtils.getLoginUser();
 		
 		// 如果已经登录，则跳转到管理首页
 		if(principal != null){
@@ -71,7 +71,6 @@ public class LoginController extends BaseController {
 
 		String username = WebUtils.getCleanParam(request, FormAuthenticationFilter.DEFAULT_USERNAME_PARAM);
 		boolean rememberMe = WebUtils.isTrue(request, FormAuthenticationFilter.DEFAULT_REMEMBER_ME_PARAM);
-		boolean mobile = WebUtils.isTrue(request, FormAuthenticationFilter.DEFAULT_MOBILE_PARAM);
 		String exception = (String)request.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
 		String message = (String)request.getAttribute(FormAuthenticationFilter.DEFAULT_MESSAGE_PARAM);
 		
@@ -81,7 +80,6 @@ public class LoginController extends BaseController {
 
 		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, username);
 		model.addAttribute(FormAuthenticationFilter.DEFAULT_REMEMBER_ME_PARAM, rememberMe);
-		model.addAttribute(FormAuthenticationFilter.DEFAULT_MOBILE_PARAM, mobile);
 		model.addAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME, exception);
 		model.addAttribute(FormAuthenticationFilter.DEFAULT_MESSAGE_PARAM, message);
 		
@@ -105,9 +103,9 @@ public class LoginController extends BaseController {
 	 * 登录成功，进入管理首页
 	 */
 	@RequiresPermissions("user")
-	@RequestMapping(value = "${adminPath}")
+	@RequestMapping(value = "")
 	public String index(HttpServletRequest request, HttpServletResponse response) {
-        LoginUser principal = UserUtils.getPrincipal();
+        LoginUser principal = UserUtils.getLoginUser();
 
 		// 登录成功后，验证码计算器清零
 		isValidateCodeLogin(principal.getLoginName(), false, true);
@@ -123,7 +121,7 @@ public class LoginController extends BaseController {
 				CookieUtils.setCookie(response, "LOGINED", "true");
 			}else if (StringUtils.equals(logined, "true")){
 				UserUtils.getSubject().logout();
-				return "redirect:" + adminPath + "/login";
+				return "redirect:/login";
 			}
 		}
 		
@@ -133,9 +131,9 @@ public class LoginController extends BaseController {
 				return renderString(response, principal);
 			}
 			if (request.getParameter("index") != null){
-				return "modules/sys/sysIndex";
+				return "modules/index";
 			}
-			return "redirect:" + adminPath + "/login";
+			return "redirect:/login";
 		}
 		//菜单
 		

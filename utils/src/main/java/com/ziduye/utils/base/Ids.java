@@ -6,7 +6,7 @@ import java.util.UUID;
 import com.ziduye.utils.security.Encodes;
 
 
-public class Ids {
+public class Ids  {
 
 	private static SecureRandom random = new SecureRandom();
 

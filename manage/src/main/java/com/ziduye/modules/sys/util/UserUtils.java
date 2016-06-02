@@ -46,7 +46,7 @@ public class UserUtils {
 	/**
 	 * 获取当前登录者对象
 	 */
-	public static LoginUser getPrincipal(){
+	public static LoginUser getLoginUser(){
 		try{
 			Subject subject = SecurityUtils.getSubject();
 			LoginUser principal = (LoginUser)subject.getPrincipal();
@@ -66,7 +66,7 @@ public class UserUtils {
 	 * @return 取不到返回 null
 	 */
 	public static User getUser(){
-        LoginUser principal = getPrincipal();
+        LoginUser principal = getLoginUser();
 		if (principal != null){
 			User user = getUser(principal.getId());
 			if (user != null){

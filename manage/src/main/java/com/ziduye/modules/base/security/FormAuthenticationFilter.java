@@ -21,25 +21,22 @@ import org.springframework.stereotype.Service;
  */
 public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.FormAuthenticationFilter {
 
-	public static final String DEFAULT_CAPTCHA_PARAM = "validateCode";
-	public static final String DEFAULT_MOBILE_PARAM = "mobileLogin";
+	public static final String DEFAULT_CAPTCHA_PARAM = "captcha";
 	public static final String DEFAULT_MESSAGE_PARAM = "message";
 
 	private String captchaParam = DEFAULT_CAPTCHA_PARAM;
-	private String mobileLoginParam = DEFAULT_MOBILE_PARAM;
 	private String messageParam = DEFAULT_MESSAGE_PARAM;
 
 	protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {
 		String username = getUsername(request);
 		String password = getPassword(request);
-		if (password==null){
+		if (password == null){
 			password = "";
 		}
 		boolean rememberMe = isRememberMe(request);
 		String host = StringUtils.getRemoteAddr((HttpServletRequest)request);
 		String captcha = getCaptcha(request);
-		boolean mobile = isMobileLogin(request);
-		return new UsernamePasswordToken(username, password.toCharArray(), rememberMe, host, captcha, mobile);
+		return new UsernamePasswordToken(username, password.toCharArray(), rememberMe, host, captcha);
 	}
 
 	public String getCaptchaParam() {
@@ -50,14 +47,6 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 		return WebUtils.getCleanParam(request, getCaptchaParam());
 	}
 
-	public String getMobileLoginParam() {
-		return mobileLoginParam;
-	}
-	
-	protected boolean isMobileLogin(ServletRequest request) {
-        return WebUtils.isTrue(request, getMobileLoginParam());
-    }
-	
 	public String getMessageParam() {
 		return messageParam;
 	}
@@ -80,7 +69,7 @@ public class FormAuthenticationFilter extends org.apache.shiro.web.filter.authc.
 	@Override
 	protected void issueSuccessRedirect(ServletRequest request,
 			ServletResponse response) throws Exception {
-//		Principal p = UserUtils.getPrincipal();
+//		Principal p = UserUtils.getLoginUser();
 //		if (p != null && !p.isMobileLogin()){
 			 WebUtils.issueRedirect(request, response, getSuccessUrl(), null, true);
 //		}else{
