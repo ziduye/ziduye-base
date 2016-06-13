@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ziduye.modules.sys.dao.MenuDao">
+
+    <sql id="menuColumns">
+    	a.id ,
+    	a.text,
+        a.url,
+        a.faicon,
+        a.sort_no,
+        a.pid,
+        a.pids,
+        a.type,
+	    a.permissions
+    </sql>
+
+	<!-- 根据编号获得用户 -->
+	<select id="get" resultType="Menu">
+		SELECT
+			<include refid="menuColumns"/>
+		FROM
+          sys_menu a
+		WHERE
+			id = #{id}
+	</select>
+
+	
+	<!-- 分页查询用户信息 -->
+	<select id="list" resultType="Menu">
+		SELECT
+			<include refid="menuColumns"/>
+		FROM
+          sys_menu a
+		WHERE
+			1 = 1
+
+	</select>
+	
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO sys_menu(
+            id ,
+            text,
+            url,
+            faicon,
+            sort_no,
+            pid,
+            pids,
+            type,
+            permissions
+		) VALUES (
+			#{id} ,
+            #{text},
+            #{url},
+            #{faicon},
+            #{sortNo},
+            #{pid},
+            #{pids},
+            #{type},
+            #{permissions}
+		)
+	</insert>
+	
+	<!-- 更新用户 -->
+	<update id="update">
+		UPDATE
+			sys_menu
+		SET
+            text = #{text},
+            url = #{url},
+            faicon = #{faicon},
+            sort_no = #{sortNo},
+            pid = #{pid},
+            pids = #{pids},
+            type = #{type},
+            permissions =  #{permissions}
+		WHERE
+			id = #{id}
+	</update>
+
+</mapper>

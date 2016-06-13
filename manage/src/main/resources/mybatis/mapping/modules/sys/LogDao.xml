@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ziduye.modules.sys.dao.LogDao">
+
+    <sql id="logColumns">
+    	a.id ,
+    	a.log_type,
+	    a.log_title,
+	    a.log_ip,
+	    a.log_url,
+	    a.log_method,
+	    a.log_params,
+	    a.user_agent,
+	    a.excp_info,
+	    a.log_time
+    </sql>
+
+	<!-- 根据编号获得用户 -->
+	<select id="get" resultType="Log">
+		SELECT
+			<include refid="logColumns"/>
+		FROM
+			sys_log a
+		WHERE
+			id = #{id}
+	</select>
+
+	
+	<!-- 分页查询用户信息 -->
+	<select id="list" resultType="Log">
+		SELECT
+			<include refid="logColumns"/>
+		FROM
+          sys_log a
+		WHERE
+			1 = 1
+
+	</select>
+	
+	<!-- 插入用户 -->
+	<insert id="insert">
+		INSERT INTO sys_log(
+            id ,
+            log_type,
+            log_title,
+            log_ip,
+            log_url,
+            log_method,
+            log_params,
+            user_agent,
+            excp_info,
+            log_time
+		) VALUES (
+			#{id},
+			#{logType},
+			#{logTitle},
+			#{logIp},
+			#{logUrl},
+			#{logMethod},
+			#{logParams},
+			#{userAgent},
+			#{excpInfo},
+			#{logTime}
+		)
+	</insert>
+	
+	<!-- 更新用户 -->
+	<update id="update">
+		UPDATE
+			sys_log
+		SET
+			log_type = #{logType},
+			log_title = #{logTitle},
+			log_ip = #{logIp},
+			log_url = #{logUrl},
+			log_method = #{logMethod},
+			log_params = #{logParams},
+			user_agent = #{userAgent},
+			excp_info = #{excpInfo},
+			log_time = #{logTime}
+		WHERE
+			id = #{id}
+	</update>
+
+</mapper>

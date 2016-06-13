@@ -3,13 +3,12 @@
  */
 package com.ziduye.modules.sys.entity;
 
-import java.util.Date;
-import java.util.Map;
-
+import com.ziduye.base.entity.DataEntity;
 import com.ziduye.utils.base.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
-import com.ziduye.base.entity.DataEntity;
+import java.util.Date;
+import java.util.Map;
 
 /**
  * 日志Entity
@@ -18,23 +17,25 @@ import com.ziduye.base.entity.DataEntity;
  */
 public class Log extends DataEntity<Log> {
 
+    // 日志类型（1：接入日志；2：错误日志）
+    public static final String TYPE_ACCESS = "1";
+    public static final String TYPE_EXCEPTION = "2";
+
 	private static final long serialVersionUID = 1L;
-	private String type; 		// 日志类型（1：接入日志；2：错误日志）
-	private String title;		// 日志标题
-	private String remoteAddr; 	// 操作用户的IP地址
-	private String requestUri; 	// 操作的URI
-	private String method; 		// 操作的方式
-	private String params; 		// 操作提交的数据
+	private String logType; 		// 日志类型（1：接入日志；2：错误日志）
+	private String logTitle;		// 日志标题
+	private String logIp; 	// 操作用户的IP地址
+	private String logUrl; 	// 操作的URI
+	private String logMethod; 		// 操作的方式
+	private String logParams; 		// 操作提交的数据
 	private String userAgent;	// 操作用户代理信息
-	private String exception; 	// 异常信息
-	
+	private String excpInfo; 	// 异常信息
+	private Date logTime;   //日志时间
+
 	private Date beginDate;		// 开始日期
 	private Date endDate;		// 结束日期
 	
-	// 日志类型（1：接入日志；2：错误日志）
-	public static final String TYPE_ACCESS = "1";
-	public static final String TYPE_EXCEPTION = "2";
-	
+
 	public Log(){
 		super();
 	}
@@ -42,88 +43,96 @@ public class Log extends DataEntity<Log> {
 	public Log(String id){
 		super(id);
 	}
-	
-	public String getType() {
-		return type;
-	}
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public String getLogType() {
+        return logType;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public void setLogType(String logType) {
+        this.logType = logType;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getLogTitle() {
+        return logTitle;
+    }
 
-	public String getRemoteAddr() {
-		return remoteAddr;
-	}
+    public void setLogTitle(String logTitle) {
+        this.logTitle = logTitle;
+    }
 
-	public void setRemoteAddr(String remoteAddr) {
-		this.remoteAddr = remoteAddr;
-	}
+    public String getLogIp() {
+        return logIp;
+    }
 
-	public String getUserAgent() {
-		return userAgent;
-	}
+    public void setLogIp(String logIp) {
+        this.logIp = logIp;
+    }
 
-	public void setUserAgent(String userAgent) {
-		this.userAgent = userAgent;
-	}
+    public String getLogUrl() {
+        return logUrl;
+    }
 
-	public String getRequestUri() {
-		return requestUri;
-	}
+    public void setLogUrl(String logUrl) {
+        this.logUrl = logUrl;
+    }
 
-	public void setRequestUri(String requestUri) {
-		this.requestUri = requestUri;
-	}
+    public String getLogMethod() {
+        return logMethod;
+    }
 
-	public String getMethod() {
-		return method;
-	}
+    public void setLogMethod(String logMethod) {
+        this.logMethod = logMethod;
+    }
 
-	public void setMethod(String method) {
-		this.method = method;
-	}
+    public String getLogParams() {
+        return logParams;
+    }
 
-	public String getParams() {
-		return params;
-	}
+    public void setLogParams(String logParams) {
+        this.logParams = logParams;
+    }
 
-	public void setParams(String params) {
-		this.params = params;
-	}
-	
-	public String getException() {
-		return exception;
-	}
+    public String getUserAgent() {
+        return userAgent;
+    }
 
-	public void setException(String exception) {
-		this.exception = exception;
-	}
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
 
-	public Date getBeginDate() {
-		return beginDate;
-	}
+    public String getExcpInfo() {
+        return excpInfo;
+    }
 
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
-	}
+    public void setExcpInfo(String excpInfo) {
+        this.excpInfo = excpInfo;
+    }
 
-	public Date getEndDate() {
-		return endDate;
-	}
+    public Date getLogTime() {
+        return logTime;
+    }
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-	
-	/**
+    public void setLogTime(Date logTime) {
+        this.logTime = logTime;
+    }
+
+    public Date getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    /**
 	 * 设置请求参数
 	 * @param paramMap
 	 */
@@ -138,7 +147,7 @@ public class Log extends DataEntity<Log> {
 			String paramValue = (param.getValue() != null && param.getValue().length > 0 ? param.getValue()[0] : "");
 			params.append(StringUtils.abbr(StringUtils.endsWithIgnoreCase(param.getKey(), "password") ? "" : paramValue, 100));
 		}
-		this.params = params.toString();
+		this.logParams = params.toString();
 	}
 	
 	@Override
