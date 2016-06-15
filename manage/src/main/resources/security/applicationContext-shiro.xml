@@ -33,6 +33,7 @@
     <bean name="shiroFilterChainDefinitions" class="java.lang.String">
         <constructor-arg>
             <value>
+                /* = user
                 /login = authc
                 /logout = logout
                 /account/** = user

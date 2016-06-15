@@ -18,6 +18,6 @@ public class RoleService extends CrudService<RoleDao, Role>{
 	 * @return
 	 */
 	public List<Role> listByUserId(String userId){
-		return dao.listByUserId(userId);
+		return null;//dao.listByUserId(userId);
 	}
 }

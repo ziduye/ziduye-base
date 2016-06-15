@@ -49,13 +49,13 @@ public class LogUtils {
 		User user = UserUtils.getUser();
 		if (user != null && user.getId() != null){
 			Log log = new Log();
-			log.setTitle(title);
-			log.setType(ex == null ? Log.TYPE_ACCESS : Log.TYPE_EXCEPTION);
-			log.setRemoteAddr(StringUtils.getRemoteAddr(request));
+			log.setLogTitle(title);
+			log.setLogType(ex == null ? Log.TYPE_ACCESS : Log.TYPE_EXCEPTION);
+			log.setLogIp(StringUtils.getRemoteAddr(request));
 			log.setUserAgent(request.getHeader("user-agent"));
-			log.setRequestUri(request.getRequestURI());
+			log.setLogUrl(request.getRequestURI());
 			log.setParams(request.getParameterMap());
-			log.setMethod(request.getMethod());
+			log.setLogMethod(request.getMethod());
 			// 异步保存日志
 			new SaveLogThread(log, handler, ex).start();
 		}
@@ -80,21 +80,21 @@ public class LogUtils {
 		@Override
 		public void run() {
 			// 获取日志标题
-			if (StringUtils.isBlank(log.getTitle())){
+			if (StringUtils.isBlank(log.getLogTitle())){
 				String permission = "";
 				if (handler instanceof HandlerMethod){
 					Method m = ((HandlerMethod)handler).getMethod();
 					RequiresPermissions rp = m.getAnnotation(RequiresPermissions.class);
 					permission = (rp != null ? StringUtils.join(rp.value(), ",") : "");
 				}
-				log.setTitle(getMenuNamePath(log.getRequestUri(), permission));
+				log.setLogTitle(getMenuNamePath(log.getLogUrl(), permission));
 			}
 			// 如果有异常，设置异常信息
 			if(ex != null){
-				log.setException(Exceptions.getStackTraceAsString(ex));
+				log.setExcpInfo(Exceptions.getStackTraceAsString(ex));
 			}
 			// 如果无标题并无异常日志，则不保存信息
-			if (StringUtils.isBlank(log.getTitle()) && StringUtils.isBlank(log.getException())){
+			if (StringUtils.isBlank(log.getLogTitle()) && StringUtils.isBlank(log.getExcpInfo())){
 				return;
 			}
 			// 保存日志信息

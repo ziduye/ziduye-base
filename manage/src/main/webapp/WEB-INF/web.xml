@@ -122,7 +122,7 @@
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 
-	<!-- SiteMesh Web-Page Layout filter-->
+	<!-- SiteMesh Web-Page Layout filter
 	<filter>
 		<filter-name>sitemeshFilter</filter-name>
 		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
@@ -131,7 +131,7 @@
 		<filter-name>sitemeshFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
+	-->
 	<!-- 出错页面定义 -->
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>

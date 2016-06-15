@@ -50,11 +50,11 @@ public class LoginController extends BaseController {
 //		}
 		
 		// 如果已经登录，则跳转到管理首页
-		if(principal != null && !principal.isMobileLogin()){
+		if(principal != null ){
 			return "redirect:" + adminPath;
 		}
 
-		return "modules/login";
+		return "modules/base/login";
 	}
 
 	/**
@@ -96,7 +96,7 @@ public class LoginController extends BaseController {
 		// 验证失败清空验证码
 		request.getSession().setAttribute(ValidateCodeServlet.VALIDATE_CODE, Ids.uuid());
 		
-		return "modules/login";
+		return "modules/base/login";
 	}
 
 	/**
@@ -125,17 +125,17 @@ public class LoginController extends BaseController {
 			}
 		}
 		
-		// 如果是手机登录，则返回JSON字符串
-		if (principal.isMobileLogin()){
-			if (request.getParameter("login") != null){
-				return renderString(response, principal);
-			}
-			if (request.getParameter("index") != null){
-				return "modules/index";
-			}
-			return "redirect:/login";
-		}
-		//菜单
+//		// 如果是手机登录，则返回JSON字符串
+//		if (principal.isMobileLogin()){
+//			if (request.getParameter("login") != null){
+//				return renderString(response, principal);
+//			}
+//			if (request.getParameter("index") != null){
+//				return "modules/index";
+//			}
+//			return "redirect:/login";
+//		}
+//		//菜单
 		
 		return "modules/index";
 	}
