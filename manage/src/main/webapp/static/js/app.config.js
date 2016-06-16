@@ -1,5 +1,5 @@
 $.root_ = $('body');
-
+$._ctx = _ctx_;
 //设置导航是否启用ajax模式
 $.navAsAjax = true;
 

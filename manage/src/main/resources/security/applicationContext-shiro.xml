@@ -33,11 +33,12 @@
     <bean name="shiroFilterChainDefinitions" class="java.lang.String">
         <constructor-arg>
             <value>
-                /* = user
+                /static/** = anon
                 /login = authc
                 /logout = logout
                 /account/** = user
                 /api/secure/** = authcBasic
+                /* = user
             </value>
         </constructor-arg>
     </bean>
@@ -46,27 +47,15 @@
     <bean id="casFilter" class="org.apache.shiro.cas.CasFilter">
         <property name="failureUrl" value="${adminPath}/login"/>
     </bean>
-    <bean id="formAuthenticationFilter" class="com.ziduye.modules.base.security.FormAuthenticationFilter">
-
-    </bean>
+    <bean id="formAuthenticationFilter" class="com.ziduye.modules.base.security.FormAuthenticationFilter" />
 
     <!-- 項目自定义的Realm -->
-    <bean id="shiroDbRealm" class="com.ziduye.modules.base.security.SystemAuthorizingRealm">
-
-    </bean>
+    <bean id="shiroDbRealm" class="com.ziduye.modules.base.security.SystemAuthorizingRealm" />
 
     <!-- 定义授权缓存管理器 -->
     <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-        <property name="cacheManagerConfigFile" value="classpath:security/ehcache-shiro.xml"/>
+        <property name="cacheManagerConfigFile" value="classpath:/security/ehcache-shiro.xml"/>
     </bean>
-
-    <!-- 定义授权缓存管理器 -->
-    <!--
-    <bean id="shiroCacheManager" class="com.thinkgem.jeesite.common.security.shiro.cache.SessionCacheManager" />
-    <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
-        <property name="cacheManager" ref="cacheManager"/>
-    </bean>
-    -->
 
     <!-- 指定本系统SESSIONID, 默认为: JSESSIONID 问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID,
         当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失! -->

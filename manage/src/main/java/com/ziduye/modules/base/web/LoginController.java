@@ -32,7 +32,15 @@ public class LoginController extends BaseController {
 	
 	@Autowired
 	private SessionDAO sessionDAO;
-	
+
+	/**
+	 * 默认访问地址
+	 */
+	@RequestMapping(value = "")
+	public String first() {
+		return "redirect:/index";
+	}
+
 	/**
 	 * 管理登录
 	 */
@@ -40,9 +48,7 @@ public class LoginController extends BaseController {
 	public String loginPage(HttpServletRequest request, HttpServletResponse response, Model model) {
 		LoginUser principal = UserUtils.getLoginUser();
 
-		if (logger.isDebugEnabled()){
-			logger.debug("login, active session size: {}", sessionDAO.getActiveSessions(false).size());
-		}
+		logger.debug("login, active session size: {}", sessionDAO.getActiveSessions(false).size());
 		
 		// 如果已登录，再次访问主页，则退出原账号。
 //		if (Global.TRUE.equals(Global.getConfig("notAllowRefreshIndex"))){
@@ -90,7 +96,7 @@ public class LoginController extends BaseController {
 		
 		// 非授权异常，登录失败，验证码加1。
 		if (!UnauthorizedException.class.getName().equals(exception)){
-			model.addAttribute("isValidateCodeLogin", isValidateCodeLogin(username, true, false));
+			//model.addAttribute("isValidateCodeLogin", isValidateCodeLogin(username, true, false));
 		}
 		
 		// 验证失败清空验证码
@@ -103,12 +109,12 @@ public class LoginController extends BaseController {
 	 * 登录成功，进入管理首页
 	 */
 	@RequiresPermissions("user")
-	@RequestMapping(value = "")
+	@RequestMapping(value = "/index")
 	public String index(HttpServletRequest request, HttpServletResponse response) {
         LoginUser principal = UserUtils.getLoginUser();
 
 		// 登录成功后，验证码计算器清零
-		isValidateCodeLogin(principal.getLoginName(), false, true);
+		//isValidateCodeLogin(principal.getLoginName(), false, true);
 		
 		if (logger.isDebugEnabled()){
 			logger.debug("show index, active session size: {}", sessionDAO.getActiveSessions(false).size());
@@ -137,7 +143,7 @@ public class LoginController extends BaseController {
 //		}
 //		//菜单
 		
-		return "modules/index";
+		return "modules/base/index";
 	}
 	
 	/**

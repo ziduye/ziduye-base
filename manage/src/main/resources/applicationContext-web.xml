@@ -7,7 +7,7 @@
 	<!-- required-->
 	<import resource="security/applicationContext-shiro.xml" />
 
-	<!-- optional
+	<!-- optional-->
 	<import resource="cache/applicationContext-ehcache.xml" />
-	-->
+
 </beans>
