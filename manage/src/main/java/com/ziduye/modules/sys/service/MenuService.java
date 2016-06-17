@@ -18,30 +18,45 @@ public class MenuService extends CrudService<MenuDao, Menu>{
 	
 	@Autowired
 	private RoleService roleService;
-	
+
 	/**
-	 * 根据用户id查询对应的菜单
-	 * @param userId
+	 * 返回树结构的全部菜单
+	 * @return
+     */
+	public List<Menu> listTree(){
+		List<Menu> result = listByParentId("0");
+		for (Menu m : result) {
+
+		}
+
+	}
+
+	/**
+	 * 根据上级id查找所有的子菜单
+	 * @param parentId 上级id
 	 * @return
 	 */
-	public List<Menu> listByUserId(String userId){
-		List<Role> roles = roleService.listByUserId(userId);
-		List<Menu> menus = Lists.newArrayList();
-		for(Role role : roles){
-			if(role != null && role.isNormail()){
-				menus.addAll(dao.listByRoleId(role.getId()));
-			}
+	public List<Menu> listByParentId(String parentId){
+		List<Menu> result = dao.listByParentId(parentId);
+		if (result == null) {
+			result = Lists.newArrayList();
 		}
-		return menus;
-		
+		return result;
 	}
-	
+
 	/**
 	 * 根据角色id查询对应的菜单
 	 * @param roleId
 	 * @return
 	 */
 	public List<Menu> listByRoleId(String roleId){
-		return dao.listByRoleId(roleId);
+		List<Menu> result = dao.listByRoleId(roleId);
+		if (result == null) {
+			result = Lists.newArrayList();
+		}
+		return result;
 	}
+
+
+
 }

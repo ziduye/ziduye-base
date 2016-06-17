@@ -8,8 +8,16 @@ import com.ziduye.modules.sys.entity.Menu;
 
 @MyBatisRepository
 public interface MenuDao extends CrudDao<Menu> {
-	public List<Menu> listByRoleId(String roleId);
-	
-	public List<Menu> findByParentIdsLike(Menu menu);
-	
+
+	/**
+	 * 根据上级id查找所有的子菜单
+	 * @param parentId 上级id
+	 * @return
+	 */
+	List<Menu> listByParentId(String parentId);
+
+	List<Menu> listByRoleId(String roleId);
+
+	List<Menu> findByParentIdsLike(Menu menu);
+
 }

@@ -1,8 +1,11 @@
 package com.ziduye.modules.sys.service;
 
+import com.google.common.collect.Lists;
 import com.ziduye.base.security.shiro.session.SessionDAO;
 import com.ziduye.modules.base.security.ILoginService;
 import com.ziduye.modules.base.security.IUser;
+import com.ziduye.modules.sys.entity.Menu;
+import com.ziduye.modules.sys.entity.Role;
 import com.ziduye.utils.resources.Global;
 import com.ziduye.utils.security.Digests;
 import com.ziduye.utils.security.Encodes;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 
 @Service
 public class SystemService implements ILoginService{
@@ -24,9 +28,31 @@ public class SystemService implements ILoginService{
 	
 	@Autowired
 	private UserService userService;
-	
+
+	@Autowired
+	private RoleService roleService;
+
+	@Autowired
+	private MenuService menuService;
+
 	@Autowired
 	private SessionDAO sessionDao;
+
+	/**
+	 * 根据用户id查询对应的菜单
+	 * @param userId
+	 * @return
+	 */
+	public List<Menu> userMenu(String userId){
+		List<Role> roles = roleService.listByUserId(userId);
+		List<Menu> menus = Lists.newArrayList();
+		for(Role role : roles){
+			if(role != null && role.isNormail()){
+				menus.addAll(menuService.listByRoleId(role.getId()));
+			}
+		}
+		return menus;
+	}
 	/**
 	 * 生成安全的密码，生成随机的16位salt并经过1024次 sha-1 hash
 	 */

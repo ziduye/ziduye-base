@@ -2,6 +2,8 @@ package com.ziduye.modules.sys.entity;
 
 import com.ziduye.modules.base.entity.TreeEntity;
 
+import java.util.List;
+
 /**
  * 菜单
  * 
@@ -14,11 +16,11 @@ public class Menu extends TreeEntity<Menu>  {
 	private String text;//菜单名称
 	private String url; //访问路径
 	private String faicon;//显示图表
-	private Integer sortNo;//排序
 	private String pid;		//父级id
 	private String pids;	//上级id
-	private String type;	//菜单类型	: 1 : top bar,2:一级菜单,3:二级菜单,4:三级菜单,
-	private String permissions;//权限标识符:
+	private String type;	//菜单类型	: 1 : 模块,2: 菜单组 ,3:菜单项,4:菜单权限项,
+	private String hide;	//非管理菜单是否显示
+	private String permissions;//权限标识符
 	
 	public String getText() {
 		return text;
@@ -37,12 +39,6 @@ public class Menu extends TreeEntity<Menu>  {
 	}
 	public void setFaicon(String faicon) {
 		this.faicon = faicon;
-	}
-	public Integer getSortNo() {
-		return sortNo;
-	}
-	public void setSortNo(Integer sortNo) {
-		this.sortNo = sortNo;
 	}
 	public String getPid() {
 		return pid;
@@ -69,6 +65,15 @@ public class Menu extends TreeEntity<Menu>  {
 	public void setPermissions(String permissions) {
 		this.permissions = permissions;
 	}
+
+	public String getHide() {
+		return hide;
+	}
+
+	public void setHide(String hide) {
+		this.hide = hide;
+	}
+
 	@Override
 	public Menu getParent() {
 		return parent;
@@ -77,5 +82,14 @@ public class Menu extends TreeEntity<Menu>  {
 	public void setParent(Menu parent) {
 		this.parent = parent;
 	}
-	
+
+	@Override
+	public List<Menu> getChildrens() {
+		return childrens;
+	}
+
+	@Override
+	public void setChildrens(List<Menu> childrens) {
+		this.childrens = childrens;
+	}
 }
